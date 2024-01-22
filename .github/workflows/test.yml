@@ -38,3 +38,4 @@ jobs:
         with:
           coverage-gist-token: ${{ secrets.GIST_TOKEN }}
           coverage-gist-id: ${{ secrets.GIST_ID }}
+          deploy-pages: true
