@@ -32,19 +32,27 @@ jobs:
 
       - name: Run tests
         run: poetry run pytest --cov=app --cov-report=html --cov-report=json
-  
+
+      - name: Create coverage badge
+        uses: simula-consulting/manual-coverage-badge@v1
+        with:
+          coverage-gist-token: ${{ secrets.GIST_TOKEN }}
+          coverage-gist-id: ${{ secrets.GIST_ID }}
+
   deploy:
     needs: build
-    runs-on: ubuntu-latest
 
     permissions:
       pages: write
       id-token: write
-    
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Test and upload coverage
-        uses: simula-consulting/test-and-upload-coverage@v1
-        with:
-          coverage-gist-token: ${{ secrets.GIST_TOKEN }}
-          coverage-gist-id: ${{ secrets.GIST_ID }}
-          deploy-pages: true
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
