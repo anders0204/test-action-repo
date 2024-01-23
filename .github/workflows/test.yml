@@ -31,11 +31,12 @@ jobs:
           poetry install
 
       - name: Run tests
-        run: poetry run pytest --cov=app --cov-report=html --cov-report=json
+        run: poetry run pytest --cov=app --cov-report=html --cov-report=json:test-action-coverage.json
 
       - name: Create coverage badge
         uses: simula-consulting/manual-coverage-badge@v1
         with:
+          coverage-json: test-action-coverage.json
           coverage-gist-token: ${{ secrets.GIST_TOKEN }}
           coverage-gist-id: ${{ secrets.GIST_ID }}
 
