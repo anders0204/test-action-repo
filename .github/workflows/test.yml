@@ -32,7 +32,15 @@ jobs:
 
       - name: Run tests
         run: poetry run pytest --cov=app --cov-report=html --cov-report=json
+  
+  deploy:
+    runs-on: ubuntu-latest
 
+    permissions:
+      pages: write
+      id-token: write
+    
+    steps:
       - name: Let's see if this works
         uses: simula-consulting/test-and-upload-coverage@v1
         with:
