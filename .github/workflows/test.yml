@@ -34,7 +34,7 @@ jobs:
         run: poetry run pytest --cov=app --cov-report=html --cov-report=json:test-action-coverage.json
 
       - name: Create coverage badge
-        uses: simula-consulting/manual-coverage-badge@v1
+        uses: simula-consulting/manual-coverage-badge@v1.1
         with:
           coverage-json: test-action-coverage.json
           coverage-gist-token: ${{ secrets.GIST_TOKEN }}
@@ -49,7 +49,7 @@ jobs:
 
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
 
     runs-on: ubuntu-latest
 
