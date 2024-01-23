@@ -34,6 +34,7 @@ jobs:
         run: poetry run pytest --cov=app --cov-report=html --cov-report=json
   
   deploy:
+    needs: build
     runs-on: ubuntu-latest
 
     permissions:
@@ -41,7 +42,7 @@ jobs:
       id-token: write
     
     steps:
-      - name: Let's see if this works
+      - name: Test and upload coverage
         uses: simula-consulting/test-and-upload-coverage@v1
         with:
           coverage-gist-token: ${{ secrets.GIST_TOKEN }}
